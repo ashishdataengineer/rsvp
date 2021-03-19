@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProcessingApplication implements CommandLineRunner {
 
-	//private static final Logger LOGGER = LoggerFactory.getLogger(ProcessingApplication.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProcessingApplication.class);
 
 	@Autowired
 	private ProcessingService processingService;
@@ -29,7 +29,7 @@ public class ProcessingApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 
-		processingService.processing();
+		processingService.run();
 
 	}
 

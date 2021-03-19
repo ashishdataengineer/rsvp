@@ -15,28 +15,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-public class SparkServiceUtil implements Serializable {
+public class SparkServiceUtil {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
 	//private static final Logger LOGGER = LoggerFactory.getLogger(SparkServiceUtil.class);
 
 	
-	public static SparkConf sparkConf;
-	public static SparkSession sparkSession;
-	private static UDF1<String, String> uuid = str -> UUID.randomUUID().toString();
+	//public static SparkConf sparkConf;
+	//public static SparkSession sparkSession;
+	//private static UDF1<String, String> uuid = str -> UUID.randomUUID().toString();
 
-	private static void getSparkConf(String master) {
+/*	private static void getSparkConf(String master) {
 
 		//LOGGER.info("Getting Spark Conf");
 
 		sparkConf = new SparkConf().setMaster(master)
 				.setAppName(ServiceConstants.SPARK_APP_NAME)
-				.set("spark.sql.caseSensitive", ServiceConstants.CASE_SENSITIVE);
+				.set("spark.sql.caseSensitive", ServiceConstants.CASE_SENSITIVE);*/
 				/*.set("url", dbProperties.getHost())
 				.set("dbtable", "select id, sname, scourse, sfee from projectdb.studenttab")
 				.set("user", dbProperties.getAuthUsername())
@@ -44,33 +45,31 @@ public class SparkServiceUtil implements Serializable {
 				.set("spark.sql.caseSensitive", ServiceConstants.CASE_SENSITIVE);
 		sparkConf.setExecutorEnv(sparkConf.getAll());*/
 
-	}
+	/*}*/
 	
 	
 	
-	public static synchronized SparkSession getSparkSession(String master) {
-
-		if (sparkSession == null) {
-			if (sparkConf == null) {
-				getSparkConf(master);
-			}
-		}
-
-		sparkSession = SparkSession.builder().config(sparkConf).getOrCreate();
-		sparkSession.udf().register("uuid", uuid, DataTypes.StringType);
-
-		return sparkSession;
-
-	}
+	/*
+	 * public static synchronized void getSparkSession(String master) {
+	 * 
+	 * if (sparkSession == null) { if (sparkConf == null) { getSparkConf(master); }
+	 * }
+	 * 
+	 * sparkSession = SparkSession.builder().config(sparkConf).getOrCreate();
+	 * sparkSession.udf().register("uuid", uuid, DataTypes.StringType);
+	 * 
+	 * 
+	 * }
+	 */
 	
-	public static Dataset<Row> startRSVPStream(){
+	/*public static Dataset<Row> startRSVPStream(){
 		
 		return sparkSession.readStream()
         .format(KafkaConstants.STREAM_FORMAT)
         .option("kafka.bootstrap.servers", KafkaConstants.KAFKA_BROKERS)
         .option("subscribe", KafkaConstants.KAFKA_TOPIC) 
         .option("failOnDataLoss", false)
-        .load();
+        .load();*/
         
         /*.selectExpr("CAST(value AS String")
         .writeStream()
@@ -89,7 +88,7 @@ public class SparkServiceUtil implements Serializable {
                 .select("meetup.*"))*/
 
                 
-	}
+	/* } */
 
 /*
 	
